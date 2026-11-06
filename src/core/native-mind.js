@@ -1,5 +1,6 @@
 import { DEFAULT_CONFIG } from "../constants/defaults.js";
 import { NativeMindError } from "../utils/errors.js";
+import { detectCapabilities } from "./capability-detector.js";
 
 export class NativeMind {
     constructor(config = {}) {
@@ -11,7 +12,8 @@ export class NativeMind {
                 ...config.privacy
             }
         }
-        this.status = "uninitialized"
+        this.status = "uninitialized";
+        this.capabilities = null;
     }
     async initialize() {
         if (this.status === "ready") return;
@@ -21,7 +23,7 @@ export class NativeMind {
         this.status = "initializing";
 
         try {
-            // Runtime initialization will be implemented here.
+            this.capabilities = await detectCapabilities();
 
             this.status = "ready";
         } catch (error) {

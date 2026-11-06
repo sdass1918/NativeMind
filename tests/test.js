@@ -8,6 +8,11 @@ await ai.initialize();
 
 console.log("After initialization:", ai.status);
 
+console.log(
+    "Browser capabilities:",
+    ai.capabilities
+);
+
 await ai.destroy();
 
 console.log("After destruction:", ai.status);
